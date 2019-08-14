@@ -1,13 +1,16 @@
 {
     "Header" : "Can you drink beer now?",
     "Answers" : {
-        "true" : ["Yes, sure", "Let´s go!", "You´re late, fire!"],
-        "false" : ["Nope!", "Unfortunately not.", "Keep calm, your time is coming!"]
+        "true" : [
+            "Yes, sure", 
+            "Let´s go!", 
+            "You´re late, fire!"
+        ],
+        "false" : [
+            "Nope!", 
+            "Unfortunately not.", 
+            "Keep calm, your time is coming!"
+        ]
     },
     "Button" : "Check again",
-    "Options": {
-        "1" : "Habe aber Urlaub!",
-        "2" : "Habe großen durst!",
-        "3" : "Habe Hangover!"
-    }
 }
