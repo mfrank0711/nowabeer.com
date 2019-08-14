@@ -1,0 +1,13 @@
+{
+    "Header" : "Kann man jetzt schon wieder Bier trinken?",
+    "Answers" : {
+        "true" : ["Ja, absolut", "Klar, los gehts", "Du bist spät dran, los gehts!"],
+        "false" : ["Nein, bleib cool", "Leider nein, leider gar nicht."]
+    },
+    "Button" : "Nochmal prüfen",
+    "Options": {
+        "1" : "Habe aber Urlaub!",
+        "2" : "Habe großen durst!",
+        "3" : "Habe Hangover!"
+    }
+}

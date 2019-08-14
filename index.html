@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>now a beer?</title>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+  </style>
+</head>
+
+<body class="grey lighten-2 center" style="font-family: 'Quicksand', sans-serif;" onload="init()">
+  <header></header>
+  <main>
+    <div class="container">
+      <h3 id="Header"></h3>
+      <div class="progress" style="top: 100px;">
+        <div class="indeterminate"></div>
+      </div>
+      <div class="card-panel grey lighten-3" id="answer" style="display:none;">
+        <p id="answer-text" style="font-size: 32px"></p>
+      </div>
+
+      <div class="row" id="buttons" style="display:none;">
+        <form onsubmit="retry();">
+          <div class="col s12">
+            <button class="btn-large waves-effect waves-light center" type="submit" name="action" id="retrybutton">
+              
+            </button>
+          </div>
+          <div class="col s6">
+            <!-- Switch -->
+            <div class="switch" style="display:none;">
+              <label>
+                Urlaub
+                <input type="checkbox" id="option1">
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col s6">
+            <!-- Switch -->
+            <div class="switch" style="display:none;">
+              <label>
+                Semesterferien
+                <input type="checkbox" id="option2">
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer grey">
+    <div class="footer-copyright">
+      <div class="container">
+        <a class="grey-text text-lighten-4" href="#!">Why</a>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    function init() {
+      $.getJSON(loadlanguage(), function (langdata) {
+        document.getElementById("Header").innerHTML = langdata.Header;
+        document.getElementById("retrybutton").innerText = langdata.Button;
+
+        $(".progress").fadeOut(4001, function () {
+          $(this).remove();
+          var currentdate = new Date();
+          $.getJSON("js/weights.json", function (calc) {
+            if (calc[currentdate.getDay()][currentdate.getHours()] >= 0.5) {
+              var status = true;
+            } else {
+              var status = false;
+            }
+            document.getElementById("answer-text").innerHTML = langdata["Answers"][status][Math.floor(
+              Math.random() * Object.keys(langdata["Answers"][status]).length)];
+          });
+
+          $("#answer").fadeIn(function () {
+            $("#buttons").fadeIn(1501);
+          });
+        });
+      });
+    }
+
+    function retry() {
+      $("#answer").fadeOut();
+      $("#buttons").fadeOut();
+      console.log("fade out done..");
+      $(".progress").fadeIn();
+      init();
+      console.log("init..");
+    }
+
+    function loadlanguage() {
+      var lang = navigator.language || navigator.userLanguage;
+      switch (lang) {
+        case "de-DE":
+          var jsonpath = "locale/" + lang + ".json"
+          break;
+
+        case "en-US":
+          var jsonpath = "locale/" + lang + ".json"
+          break;
+
+        default:
+          var jsonpath = "locale/en-US.json"
+          break;
+      }
+      return jsonpath;
+    }
+  </script>
+</body>
+
+</html>
