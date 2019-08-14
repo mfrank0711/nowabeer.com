@@ -35,8 +35,9 @@ It´s simple json:
 Just replace the values with values from your local language from your browser and create a pull request. Name the file like your language code and .json
 Example: `de-DE.json`
 
-The app will load your language file if available automaticly. Magic ;)
+*And please use your local slang ;)*
 
+The app will load your language file if available automaticly. Magic ;)
 You can find your country code here: https://gist.github.com/wpsmith/7604842
 
 Great! Thanks for having me and enjoy your beer ;)
