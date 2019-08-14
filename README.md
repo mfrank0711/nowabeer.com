@@ -17,8 +17,8 @@ Like I said, a first draft is a first draft.
 * my fingers, my head and my passion for beer
 
 ### how can you help?
-Help me with translating the app in your language.
-Its easy.
+Help me with translating the app in your language or adding more answers in your language. 
+Its easy and it would be really cool.
 
 There is a folder called `locale` and there are the language files.
 It´s simple json:
