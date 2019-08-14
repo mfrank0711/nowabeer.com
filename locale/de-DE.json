@@ -1,13 +1,20 @@
 {
     "Header" : "Kann man jetzt schon wieder Bier trinken?",
     "Answers" : {
-        "true" : ["Ja, absolut", "Klar, los gehts", "Du bist spät dran, los gehts!"],
-        "false" : ["Nein, bleib cool", "Leider nein, leider gar nicht."]
+        "true" : [
+            "Ja, absolut", 
+            "Klar, los gehts", 
+            "Du bist spät dran, los gehts!",
+            "Ich dachte du fragst nie!",
+            "Ach, der Herr ist auch schon aufgewacht!?. Klaro!",
+            "Es gibt also doch dumme Fragen ;)"
+        ],
+        "false" : [
+            "Nein, bleib cool",
+            "Leider nein, leider gar nicht.",
+            "Bruder, nein.",
+            "Fröhne dem edlen Getränk lieber später."
+            ]
     },
-    "Button" : "Nochmal prüfen",
-    "Options": {
-        "1" : "Habe aber Urlaub!",
-        "2" : "Habe großen durst!",
-        "3" : "Habe Hangover!"
-    }
+    "Button" : "Nochmal prüfen"
 }
