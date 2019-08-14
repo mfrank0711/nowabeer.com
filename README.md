@@ -10,6 +10,7 @@ Who decides when to drink a beer? `weights.json` is a first draft with weekdays 
 Everything >= 0.5 is a yes, cheers ;)
 Like I said, a first draft is a first draft.
 
+Answers a coming from the jsons in the locale folder. Depending on the result it will pick a random value from the array.
 
 ### what are the tools?
 * MaterializeCSS + JS
@@ -26,13 +27,21 @@ It´s simple json:
 {
     "Header" : "Can you drink beer now?",
     "Answers" : {
-        "true" : ["Yes, sure", "Let´s go!", "You´re late, fire!"],
-        "false" : ["Nope!", "Unfortunately not.", "Keep calm, your time is coming!"]
+        "true" : [
+            "Yes, sure", 
+            "Let´s go!", 
+            "You´re late, fire!"
+        ],
+        "false" : [
+            "Nope!", 
+            "Unfortunately not.", 
+            "Keep calm, your time is coming!"
+        ]
     },
     "Button" : "Check again"
 }
 ```
-Just replace the values with values from your local language from your browser and create a pull request. Name the file like your language code and .json
+Just replace the values with values from your local language from your browser and create a pull request. Name the file like your language code and .json, or as already mentioned, edit a existing one.
 Example: `de-DE.json`
 
 *And please use your local slang ;)*
