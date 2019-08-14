@@ -38,3 +38,5 @@ Example: `de-DE.json`
 The app will load your language file if available automaticly. Magic ;)
 
 You can find your country code here: https://gist.github.com/wpsmith/7604842
+
+Great! Thanks for having me and enjoy your beer ;)
