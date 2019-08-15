@@ -90,28 +90,21 @@
     function retry() {
       $("#answer").fadeOut();
       $("#buttons").fadeOut();
-      console.log("fade out done..");
-      $(".progress").fadeIn();
+      $(".progress").fadeIn(500);
       init();
-      console.log("init..");
     }
 
     function loadlanguage() {
-      var lang = navigator.language || navigator.userLanguage;
-      switch (lang) {
-        case "de-DE":
-          var jsonpath = "locale/" + lang + ".json"
-          break;
-
-        case "en-US":
-          var jsonpath = "locale/" + lang + ".json"
-          break;
-
-        default:
-          var jsonpath = "locale/en-US.json"
-          break;
+      var response = jQuery.ajax({
+        url: "locale/" + (navigator.language || navigator.userLanguage) + ".json",
+        type: 'HEAD',
+        async: false
+      }).status;
+      if (response == 200) {
+        return "locale/" + (navigator.language || navigator.userLanguage) + ".json";
+      } else {
+        return "locale/en-US.json"
       }
-      return jsonpath;
     }
   </script>
 </body>
