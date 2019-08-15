@@ -1,0 +1,16 @@
+{
+    "Header": "Biertje?",
+    "Answers": {
+        "true": [
+            "Natuurlijk, het is al bijna middag",
+            "Doe er maar één",
+            "Te laat, proost!"
+        ],
+        "false": [
+            "Nee dank je",
+            "Dat zal helaas niet gaan",
+            "Rustig aan, komt goed!"
+        ]
+    },
+    "Button": "Nog een keer"
+}
