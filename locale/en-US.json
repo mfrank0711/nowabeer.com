@@ -4,12 +4,21 @@
         "true" : [
             "Yes, sure", 
             "Let´s go!", 
-            "You´re late, fire!"
+            "You´re late, fire!",
+            "What are you waiting for?",
+            "I thought you never asked.",
+            "I think more than one is okay, too.",
+            "Hell, yeah.",
+            "Be my beer buddy. Cheers."
         ],
         "false" : [
             "Nope!", 
             "Unfortunately not.", 
-            "Keep calm, your time is coming!"
+            "Keep calm, your time is coming!",
+            "Wtf, no!",
+            "Are you kidding?",
+            "You´re serious?",
+            "In China, maybe."
         ]
     },
     "Button" : "Check again"
