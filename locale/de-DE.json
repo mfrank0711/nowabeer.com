@@ -7,13 +7,22 @@
             "Du bist spät dran, los gehts!",
             "Ich dachte du fragst nie!",
             "Ach, der Herr ist auch schon aufgewacht!? Klaro!",
-            "Es gibt also doch dumme Fragen ;)"
+            "Es gibt also doch dumme Fragen ;)",
+            "Aber wehe du trinkst alleine!",
+            "Deine Freunde trinken schon, wetten.",
+            "Ja, du wirst schon wieder hässlich.",
+            "Legs Handy weg und geh ballern",
+            "Ballern Junge, ballern."
         ],
         "false" : [
             "Nein, bleib cool",
             "Leider nein, leider gar nicht.",
             "Bruder, nein.",
-            "Fröhne dem edlen Getränk lieber später."
+            "Fröhne dem edlen Getränk lieber später.",
+            "Du hast doch schon gesoffen, oder?",
+            "Dumm ist der, der dummes tut.",
+            "Jetzt? Hast du keine Hobbys?",
+            "Ja klar, wenn du Alki bist oder werden willst."
             ]
     },
     "Button" : "Nochmal prüfen"

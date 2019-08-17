@@ -63,6 +63,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
     function init() {
+      tweet = false;
+      answer = "";
       $.getJSON(loadlanguage(), function (langdata) {
         document.getElementById("Header").innerHTML = langdata.Header;
         document.getElementById("retrybutton").innerText = langdata.Button;
@@ -76,8 +78,26 @@
             } else {
               var status = false;
             }
-            document.getElementById("answer-text").innerHTML = langdata["Answers"][status][Math.floor(
-              Math.random() * Object.keys(langdata["Answers"][status]).length)];
+            answer = langdata["Answers"][status][Math.floor(Math.random() * Object.keys(langdata["Answers"][
+              status
+            ]).length)]
+            document.getElementById("answer-text").innerHTML = answer;
+
+            if (!tweet) {
+              $.ajax({
+                type: "GET",
+                url: "php/tweet.php",
+                data: {
+                  loc: (navigator.language || navigator.userLanguage),
+                  q: langdata.Header,
+                  a: answer
+                },
+                success: function (data) {
+                  console.log(data);
+                }
+              });
+              tweet = true;
+            }
           });
 
           $("#answer").fadeIn(function () {
@@ -100,6 +120,7 @@
         type: 'HEAD',
         async: false
       }).status;
+      // try to load local language file if exists, otherwise fallback to en-US
       if (response == 200) {
         return "locale/" + (navigator.language || navigator.userLanguage) + ".json";
       } else {
