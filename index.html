@@ -65,7 +65,18 @@
     function init() {
       tweet = false;
       answer = "";
+      // loading language
       $.getJSON(loadlanguage(), function (langdata) {
+        // adding gifs to answers
+        $.getJSON("locale/gifs.json", function (gifs) {
+          gifs.Answers.true.forEach(element => {
+            langdata.Answers.true.push(element);
+          });
+          gifs.Answers.false.forEach(element => {
+            langdata.Answers.false.push(element);
+          });
+        });
+
         document.getElementById("Header").innerHTML = langdata.Header;
         document.getElementById("retrybutton").innerText = langdata.Button;
 
