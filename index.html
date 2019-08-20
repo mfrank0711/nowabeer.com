@@ -41,7 +41,7 @@
       <div class="row" id="buttons" style="display:none;">
         <form onsubmit="retry();">
           <div class="col s12">
-            <button class="btn-large waves-effect waves-light center" type="submit" id="retrybutton">
+            <button class="btn-large waves-effect waves-light center pulse" type="submit" id="retrybutton">
             </button>
           </div>
         </form>
@@ -89,10 +89,19 @@
             } else {
               var status = false;
             }
-            answer = langdata["Answers"][status][Math.floor(Math.random() * Object.keys(langdata["Answers"][
-              status
-            ]).length)]
-            document.getElementById("answer-text").innerHTML = answer;
+
+            answer = langdata["Answers"][status][Math.floor(
+              Math.random() * Object.keys(langdata["Answers"][status])
+              .length)];
+            // gif or not, add the answer
+            if (answer.includes("https://")) {
+              document.getElementById("answer").innerHTML = '<img src="' +
+                answer + '" class="responsive-img">';
+            } else {
+              document.getElementById("answer").innerHTML =
+                '<p id="answer-text" style="font-size: 32px">' + answer +
+                '</p>';
+            }
 
             if (!tweet) {
               $.ajax({
