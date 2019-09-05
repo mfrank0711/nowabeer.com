@@ -60,10 +60,11 @@
 
   <!--JavaScript at end of body for optimized loading-->
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/beer.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   <script>
     function init() {
-      tweet = false;
       answer = "";
       // loading language
       $.getJSON(loadlanguage(), function (langdata) {
@@ -82,70 +83,28 @@
 
         $(".progress").fadeOut(4001, function () {
           $(this).remove();
-          var currentdate = new Date();
-          $.getJSON("js/weights.json", function (calc) {
-            if (calc[currentdate.getDay()][currentdate.getHours()] >= 0.5) {
-              var status = true;
-            } else {
-              var status = false;
-            }
-
-            answer = langdata["Answers"][status][Math.floor(
-              Math.random() * Object.keys(langdata["Answers"][status])
-              .length)];
-            // gif or not, add the answer
-            if (answer.includes("https://")) {
-              document.getElementById("answer").innerHTML = '<img src="' +
-                answer + '" class="responsive-img">';
-            } else {
-              document.getElementById("answer").innerHTML =
-                '<p id="answer-text" style="font-size: 32px">' + answer +
-                '</p>';
-            }
-
-            if (!tweet) {
-              $.ajax({
-                type: "GET",
-                url: "php/tweet.php",
-                data: {
-                  loc: (navigator.language || navigator.userLanguage),
-                  q: langdata.Header,
-                  a: answer
-                },
-                success: function (data) {
-                  console.log(data);
-                }
-              });
-              tweet = true;
-            }
-          });
-
+          console.log(window.location.href.split("/"));
+          var signature_name = window.location.href.split("/")[3].match("^[^?]*");
+          console.log(signature_name);
+          
+          if (signature_name !== "") {
+            $.getJSON("locale/signature-move.json", function (signature) {
+              if (signature[signature_name]) {
+                document.getElementById("answer").innerHTML = '<img src="' +
+                  signature[signature_name] +
+                  '" class="responsive-img"><p>Oh yes, ' + signature_name + '</p>';
+              } else {
+                random_answer(langdata, true);
+              }
+            });
+          } else {
+            random_answer(langdata, true);
+          }
           $("#answer").fadeIn(function () {
             $("#buttons").fadeIn(1501);
-          });
+        });
         });
       });
-    }
-
-    function retry() {
-      $("#answer").fadeOut();
-      $("#buttons").fadeOut();
-      $(".progress").fadeIn(500);
-      init();
-    }
-
-    function loadlanguage() {
-      var response = jQuery.ajax({
-        url: "locale/" + (navigator.language || navigator.userLanguage) + ".json",
-        type: 'HEAD',
-        async: false
-      }).status;
-      // try to load local language file if exists, otherwise fallback to en-US
-      if (response == 200) {
-        return "locale/" + (navigator.language || navigator.userLanguage) + ".json";
-      } else {
-        return "locale/en-US.json"
-      }
     }
   </script>
 </body>
