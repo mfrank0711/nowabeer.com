@@ -5,7 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Slack integration, but working on it
+- public Slack integration, but still working on it
+
+## [1.5.1] - 2019-09-17
+### Added
+- fallback to Emergency mode after some retries (first version will be improved later) 
+
+### Changed
+- pre-loading gifs during the waiting progress
+- no reload of the entire page after clicking the retry button
+- updating app store with new images and description, already 8 users :D
 
 ## [1.5.0] - 2019-09-05
 ### Added

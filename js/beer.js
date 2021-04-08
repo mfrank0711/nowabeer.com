@@ -1,5 +1,5 @@
 // output: random gif or answer
-function random_answer(langdata, twitter=false) {
+function random_answer(langdata, twitter = false) {
     var currentdate = new Date();
     $.getJSON("/js/weights.json", function (calc) {
         if (calc[currentdate.getDay()][currentdate.getHours()] >= 0.5) {
@@ -33,9 +33,6 @@ function tweet(langdata) {
             loc: (navigator.language || navigator.userLanguage),
             q: langdata.Header,
             a: answer
-        },
-        success: function (data) {
-            console.log(data);
         }
     });
 }
@@ -44,21 +41,23 @@ function tweet(langdata) {
 function retry() {
     $("#answer").fadeOut();
     $("#buttons").fadeOut();
-    $(".progress").fadeIn();
-    init();
+    $(".progress").fadeIn(function () {
+        init();
+    });
 }
 
 // load language with fallback
 function loadlanguage() {
-    var response = jQuery.ajax({
+    var lang = "./locale/en-US.json";
+    $.ajax({
         url: "../locale/" + (navigator.language || navigator.userLanguage) + ".json",
-        type: 'HEAD',
-        async: false
-    }).status;
-    // try to load local language file if exists, otherwise fallback to en-US
-    if (response == 200) {
-        return "../locale/" + (navigator.language || navigator.userLanguage) + ".json";
-    } else {
-        return "../locale/en-US.json";
-    }
+        success: function (data) {
+    
+            lang = "./locale/" + (navigator.language || navigator.userLanguage) + ".json";
+        },
+        error: function (data) {
+            lang = "./locale/en-US.json";
+        }
+    });
+    return lang;
 }

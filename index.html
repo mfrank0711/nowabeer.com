@@ -39,9 +39,9 @@
       </div>
 
       <div class="row" id="buttons" style="display:none;">
-        <form onsubmit="retry();">
+        <form onsubmit="return false">
           <div class="col s12">
-            <button class="btn-large waves-effect waves-light center pulse" type="submit" id="retrybutton">
+            <button class="btn-large waves-effect waves-light center pulse" type="submit" id="retrybutton" onclick="retry();">
             </button>
           </div>
         </form>
@@ -52,60 +52,67 @@
   <footer class="page-footer grey">
     <div class="footer-copyright">
       <div class="container">
-        <a class="grey-text text-lighten-4" href="https://github.com/mfrank0711/nowabeer.com">Why</a>
+        <a class="grey-text text-lighten-4" href="https://github.com/mfrank0711/nowabeer.com">Why</a> | 
+        <a class="grey-text text-lighten-4" href="https://play.google.com/store/apps/details?id=com.nowabeer">Google Play</a>
       </div>
     </div>
   </footer>
   </div>
 
   <!--JavaScript at end of body for optimized loading-->
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/beer.js"></script>
+  <script type="text/javascript" src="./js/materialize.min.js"></script>
+  <script type="text/javascript" src="./js/beer.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <script>
-    function init() {
-      answer = "";
-      // loading language
-      $.getJSON(loadlanguage(), function (langdata) {
-        // adding gifs to answers
-        $.getJSON("locale/gifs.json", function (gifs) {
-          gifs.Answers.true.forEach(element => {
-            langdata.Answers.true.push(element);
-          });
-          gifs.Answers.false.forEach(element => {
-            langdata.Answers.false.push(element);
-          });
-        });
+      retries = 0;
+      twitter = true;
 
-        document.getElementById("Header").innerHTML = langdata.Header;
-        document.getElementById("retrybutton").innerText = langdata.Button;
-
-        $(".progress").fadeOut(4001, function () {
-          $(this).remove();
-          console.log(window.location.href.split("/"));
-          var signature_name = window.location.href.split("/")[3].match("^[^?]*");
-          console.log(signature_name);
-          
-          if (signature_name !== "") {
-            $.getJSON("locale/signature-move.json", function (signature) {
-              if (signature[signature_name]) {
-                document.getElementById("answer").innerHTML = '<img src="' +
-                  signature[signature_name] +
-                  '" class="responsive-img"><p>Oh yes, ' + signature_name + '</p>';
-              } else {
-                random_answer(langdata, true);
-              }
-            });
+      function init() {
+          answer = "";
+          if (retries >= 3) {
+              var signature_name = "Emergency";
           } else {
-            random_answer(langdata, true);
+              var signature_name = window.location.href.split("/")[3].match("^[^?]*");
           }
-          $("#answer").fadeIn(function () {
-            $("#buttons").fadeIn(1501);
-        });
-        });
-      });
-    }
+
+          // loading language
+          $.getJSON(loadlanguage(), function (langdata) {
+              // adding gifs to answers
+              $.getJSON("locale/gifs.json", function (gifs) {
+                  gifs.Answers.true.forEach(element => {
+                      langdata.Answers.true.push(element);
+                  });
+                  gifs.Answers.false.forEach(element => {
+                      langdata.Answers.false.push(element);
+                  });
+              });
+              document.getElementById("Header").innerHTML = langdata.Header;
+              document.getElementById("retrybutton").innerText = langdata.Button;
+
+              if (signature_name != "") {
+                  $.getJSON("locale/signature-move.json", function (signature) {
+                      if (signature[signature_name]) {
+                          document.getElementById("answer").innerHTML = '<img src="' +
+                              signature[signature_name] +
+                              '" class="responsive-img"><p>' + langdata.Emergency + '</p>';
+                      } else {
+                          random_answer(langdata, twitter);
+                      }
+                  });
+              } else {
+                  random_answer(langdata, twitter);
+              }
+          });
+
+          // fade out progress bar, fade in answer and retry button
+          $(".progress").fadeOut(4001, function () {
+              $("#answer").fadeIn(function () {
+                  $("#buttons").fadeIn(1501);
+                  retries++;
+              });
+          });
+      }
   </script>
 </body>
 
